@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StartPage extends StatelessWidget {
-  const StartPage({super.key});
+  final void Function() changeScreen;
+  const StartPage({super.key, required this.changeScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class StartPage extends StatelessWidget {
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.white
           ),
-            onPressed: () {},
+            onPressed: changeScreen,
             label: const Text(
               'Start Quiz',
               style: TextStyle(
