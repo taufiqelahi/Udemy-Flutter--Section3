@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_basics/data/questions.dart';
 import 'package:quiz_app_basics/questions_screen.dart';
+import 'package:quiz_app_basics/result_screen.dart';
 import 'package:quiz_app_basics/start_page.dart';
 
 class Quiz extends StatefulWidget {
@@ -20,7 +22,7 @@ class _QuizState extends State<Quiz> {
   }
   void changeScreen() {
     setState(() {
-      activeScreen = QuestionsScreen();
+      activeScreen = const QuestionsScreen();
     });
   }
 
