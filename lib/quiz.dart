@@ -12,17 +12,35 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget ?activeScreen ;
+  Widget? activeScreen;
+  List<String> onChoose = [];
 
   @override
   void initState() {
-    activeScreen=  StartPage(changeScreen: changeScreen,);
+    activeScreen = StartPage(
+      changeScreen: changeScreen,
+    );
     // TODO: implement initState
     super.initState();
   }
+
+  void addAnswer(String answer) {
+    onChoose.add(answer);
+    if (onChoose.length == questions.length) {
+      setState(() {
+        onChoose=[];
+
+        activeScreen = StartPage(changeScreen: changeScreen);
+      });
+    }
+    print(onChoose);
+  }
+
   void changeScreen() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      activeScreen = QuestionsScreen(
+        getAnswer: addAnswer,
+      );
     });
   }
 
@@ -32,12 +50,11 @@ class _QuizState extends State<Quiz> {
       home: Scaffold(
           body: Container(
               decoration: const BoxDecoration(
-
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [Colors.purpleAccent, Colors.deepPurple])),
-              child:activeScreen)),
+              child: activeScreen)),
     );
   }
 }
