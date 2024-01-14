@@ -28,12 +28,12 @@ class _QuizState extends State<Quiz> {
     onChoose.add(answer);
     if (onChoose.length == questions.length) {
       setState(() {
-        onChoose=[];
 
-        activeScreen = StartPage(changeScreen: changeScreen);
+        activeScreen = ResultScreen(
+          onChoose: onChoose,
+        );
       });
     }
-    print(onChoose);
   }
 
   void changeScreen() {
