@@ -23,14 +23,18 @@ class _QuizState extends State<Quiz> {
     // TODO: implement initState
     super.initState();
   }
-
+void reStart(){
+    onChoose=[];
+    setState(() {
+      activeScreen=QuestionsScreen(getAnswer: addAnswer);
+    });
+}
   void addAnswer(String answer) {
     onChoose.add(answer);
     if (onChoose.length == questions.length) {
       setState(() {
-
         activeScreen = ResultScreen(
-          onChoose: onChoose,
+          onChoose: onChoose, onRestart:reStart,
         );
       });
     }
@@ -53,7 +57,10 @@ class _QuizState extends State<Quiz> {
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Colors.purpleAccent, Colors.deepPurple])),
+                      colors: [
+                    Color.fromARGB(255, 78, 13, 151),
+                    Color.fromARGB(255, 107, 15, 168),
+                  ])),
               child: activeScreen)),
     );
   }

@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app_basics/data/questions.dart';
 import 'package:quiz_app_basics/question-sumary.dart';
 
 class ResultScreen extends StatelessWidget {
   final List<String> onChoose;
-  const ResultScreen({super.key, required this.onChoose});
+  final void Function() onRestart;
+  const ResultScreen(
+      {super.key, required this.onChoose, required this.onRestart});
   List<Map<String, dynamic>> getSummaryData() {
     List<Map<String, dynamic>> summary = [];
     for (int i = 0; i < onChoose.length; i++) {
@@ -30,16 +33,34 @@ class ResultScreen extends StatelessWidget {
       child: Container(
           margin: const EdgeInsets.all(40),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+
+
             children: [
               Text(
-                'You completed $totalCorrectAns out of ${questions.length}',
-                style:  TextStyle(
-              color: Color.fromARGB(250, 227, 210, 250), fontSize: 24),
+                'You answered $totalCorrectAns out of ${questions.length} questions correctly!',
+                style: GoogleFonts.lato(
+                  color: const Color.fromARGB(255, 230, 200, 253),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 30,
+              ),
               QuestionSummary(summaryData: summaryData),
-              TextButton(onPressed: () {}, child: Text('Reset')),
+              const SizedBox(
+                height: 30,
+              ),
+              TextButton.icon(
+                onPressed: onRestart,
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                ),
+                icon: const Icon(Icons.refresh),
+                label: const Text('Restart Quiz!'),
+              )
             ],
           )),
     );

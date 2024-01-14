@@ -7,37 +7,63 @@ class QuestionSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: summaryData
-          .map((data) => Row(
-                children: [
-                  Text(((data['question_index'] as int) + 1).toString(),
-                      style:
-                          GoogleFonts.lato(color: Colors.black, fontSize: 20)),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(data['question'],
-                            style: GoogleFonts.lato(
-                                color: Colors.black, fontSize: 20)),
-                        SizedBox(
-                          height: 5,
+    return SizedBox(
+      height: 300,
+      child: SingleChildScrollView(
+        child: Column(
+          children: summaryData
+              .map((data) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 30,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: data['user_ans'] == data['correct_ans']
+                                ? const Color.fromARGB(255, 150, 241, 198)
+                                : const Color.fromARGB(255, 249, 133, 241),
+                        borderRadius: BorderRadius.circular(100)
                         ),
-                        Text(data['correct_ans'],
-                            style: GoogleFonts.lato(
-                                color: Colors.black, fontSize: 16)),
-                        SizedBox(
-                          height: 5,
+                        child: Text(
+                            ((data['question_index'] as int) + 1).toString(),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(data['question'],
+                                style: GoogleFonts.lato(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold)),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(data['user_ans'],
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 202, 171, 252))),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(data['correct_ans'],
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 181, 254, 246))),
+                          ],
                         ),
-                        Text(data['user_ans'],
-                            style: GoogleFonts.lato(
-                                color: Colors.black, fontSize: 16)),
-                      ],
-                    ),
-                  )
-                ],
-              ))
-          .toList(),
+                      )
+                    ],
+                  ))
+              .toList(),
+        ),
+      ),
     );
   }
 }
