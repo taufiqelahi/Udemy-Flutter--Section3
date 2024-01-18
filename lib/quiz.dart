@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_basics/data/questions.dart';
+import 'package:quiz_app_basics/my_question_screen.dart';
 import 'package:quiz_app_basics/questions_screen.dart';
 import 'package:quiz_app_basics/result_screen.dart';
 import 'package:quiz_app_basics/start_page.dart';
@@ -42,9 +43,10 @@ void reStart(){
 
   void changeScreen() {
     setState(() {
-      activeScreen = QuestionsScreen(
-        getAnswer: addAnswer,
-      );
+      activeScreen=MyQuestionScreen();
+      // activeScreen = QuestionsScreen(
+      //   getAnswer: addAnswer,
+      // );
     });
   }
 

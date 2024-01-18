@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AnswerButton extends StatelessWidget {
-  const AnswerButton(
-      {super.key, required this.answerText, required this.onPressed, });
+class MyAnswerButton extends StatefulWidget {
+  const MyAnswerButton({
+    super.key,
+    required this.answerText,
+  });
   final String answerText;
-  final void Function() onPressed;
+
+  @override
+  State<MyAnswerButton> createState() => _MyAnswerButtonState();
+}
+
+class _MyAnswerButtonState extends State<MyAnswerButton> {
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +23,18 @@ class AnswerButton extends StatelessWidget {
             horizontal: 40,
           ),
           backgroundColor: const Color.fromARGB(255, 33, 1, 95),
-          foregroundColor: Colors.white,
+          foregroundColor: isPressed ? Colors.black : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: () {
+          setState(() {
+            isPressed = !isPressed;
+          });
+        },
         child: Text(
-
-          answerText,
+          widget.answerText,
           textAlign: TextAlign.center,
         ));
   }

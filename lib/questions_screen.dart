@@ -44,7 +44,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               height: 16,
             ),
             ...currentQuestion.getShuffledAnswers().map((e) =>
-                AnswerButton(answerText: e, onPressed: () => nextQuestion(e)))
+                AnswerButton(answerText: e, onPressed: () => nextQuestion(e),))
           ],
         ),
       ),
